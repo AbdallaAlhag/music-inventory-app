@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <div class="container">
+      <%- include("./partials/sidebar.ejs") %>
+      <div class="content">
+        <div class="main-content">
+          <h3>Recently Released</h3>
+          <div class="content-results">
+            <% inventory.forEach(type => { %> <%- include("./partials/Card.ejs",
+            { type }) %> <% }); %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

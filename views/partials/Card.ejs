@@ -1,0 +1,10 @@
+<div class="content-results-card">
+  <img src="<%= type.cover_url ? type.cover_url : '/default-album-cover.png' %>" alt="<%= type.title ? `album cover for ${type.title}` : '' %>" />
+  <h4><%= type.title ? type.title : '' %></h4>
+  <h4><%= type.name ? type.name : '' %></h4>
+  <p><%= type.artist ? type.artist : '' %></p>
+  <% if (type.release_date) { %>
+    <p><%= moment(type.release_date).format("MMM Do YYYY") %></p>
+  <% } %>
+</div>
+

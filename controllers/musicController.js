@@ -1,13 +1,13 @@
-const { getHomePageInfo } = require('../db/queries');
+const { getHomePageInfo, getCategoryInfo } = require('../db/queries');
 const moment = require('moment');
 async function getHomePage(req, res) {
 
     try {
         const recentAlbums = await getHomePageInfo();
-        console.log(recentAlbums);
+        // console.log(recentAlbums);
         res.render('index', {
             title: 'Index!',
-            recentlyAddedAlbums: recentAlbums,
+            inventory: recentAlbums,
             moment: moment,
         });
     } catch (error) {
@@ -16,4 +16,21 @@ async function getHomePage(req, res) {
     }
 }
 
-module.exports = { getHomePage };
+const getCategory = async (req, res) => {
+    const type = req.params.category;
+
+    try {
+        const gatheredInventory = await getCategoryInfo(type);
+        // console.log(recentAlbums);
+        res.render('index', {
+            title: type,
+            inventory: gatheredInventory,
+            moment: moment,
+        });
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+module.exports = { getHomePage, getCategory };
