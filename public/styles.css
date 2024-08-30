@@ -36,7 +36,7 @@ aside button {
   cursor: pointer;
   width: 100%;
   background-color: transparent;
-  color: white;
+  color: whitesmoke;
 }
 
 aside button:hover {
@@ -47,4 +47,57 @@ i {
 }
 ul {
   list-style: none;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #1a1a1a;
+  width: 100%;
+  color: whitesmoke;
+}
+
+.content h3 {
+  font-size: 56px;
+  padding: 20px;
+  padding-left: 0px;
+}
+.nav-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.nav-buttons button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  /* justify-content: space-between; */
+
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left; /* Align text to the left */
+  border: none;
+  padding: 15px;
+  height: 150px;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 5px;
+  color: whitesmoke;
+}
+
+.nav-buttons button:hover {
+  filter: brightness(120%);
+  transform: scale(0.98);
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+.nav-buttons button img {
+  margin-left: 200px; /* Adjust the space between text and image */
+  height: 100%; /* Adjust image size */
+  width: auto; /* Adjust image size */
+  border-radius: 5px;
 }

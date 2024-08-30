@@ -4,8 +4,36 @@
   <body>
     <div class="container">
       <%- include("./partials/sidebar.ejs") %>
-      <p>hi</p>
-      <i class="fa-solid fa-house" style="color: #ffffff"></i>
+      <div class="content">
+        <h3>Good morning</h3>
+        <div class="nav-buttons">
+          <button style="background-color: #e51e31">Rock<img
+            src="/navButton/rockIcon.jpg"
+            alt="The strokes group photo"
+          /></button>
+          <button style="background-color: #8c67ac">
+            Hip Hop<img
+              src="/navButton/hiphopIcon.jpg"
+              alt="Andre3000 posing"
+            />
+          </button>
+          <button style="background-color: #1e3264">Indie<img
+            src="/navButton/indieIcon.jpg"
+            alt="Andre3000 posing"
+          /></button>
+          <button style="background-color: #5f8108">Pop<img
+            src="/navButton/popIcon.jpeg"
+            alt="Andre3000 posing"
+          /></button>
+        </div>
+        <div class="main-content">
+          <h3>Recently added</h3>
+          <div class="recently-added">
+            <% recentlyAddedAlbums.forEach(album => { %> <%-
+            include("./partials/albumCard.ejs", { album }) %> <% }); %>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

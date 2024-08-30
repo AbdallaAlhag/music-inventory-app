@@ -4,5 +4,5 @@ const musicController = require("../controllers/musicController.js");
 
 const router = express.Router();
 // GET home page
-router.get("/", musicController.getArtist);
+router.get("/", musicController.getHomePage);
 module.exports = router;
