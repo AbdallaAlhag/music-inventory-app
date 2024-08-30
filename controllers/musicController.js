@@ -1,4 +1,5 @@
 const { getHomePageInfo } = require('../db/queries');
+const moment = require('moment');
 async function getHomePage(req, res) {
 
     try {
@@ -7,6 +8,7 @@ async function getHomePage(req, res) {
         res.render('index', {
             title: 'Index!',
             recentlyAddedAlbums: recentAlbums,
+            moment: moment,
         });
     } catch (error) {
         console.error('Error fetching artists:', error);

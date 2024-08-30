@@ -1,6 +1,6 @@
-<div class="card">
-  <h4>Artist</h4>
-  <p>Album</p>
-  <p>Genre</p>
-  <p>Label</p>
+<div class="recently-added-card">
+  <img src="<%= album.cover_url %>" alt="album cover for <%= album.title %>" />
+  <h4><%= album.title %></h4>
+  <p><%= album.artist %></p>
+  <p><%= moment(album.release_date).format("MMM Do YYYY") %></p>
 </div>

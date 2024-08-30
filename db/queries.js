@@ -6,7 +6,7 @@ async function getHomePageInfo() {
     // return rows;
     try {
         const recentAlbumsQuery = `
-        SELECT albums.title, albums.release_date, artists.name AS artist
+        SELECT albums.title, albums.release_date, albums.cover_url, artists.name AS artist
         FROM albums
         JOIN artists ON albums.artist_id = artists.id
         ORDER BY albums.release_date DESC
