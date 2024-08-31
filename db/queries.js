@@ -174,7 +174,7 @@ async function getDetailInfo(id, type) {
 }
 
 
-async function insertNameIntoArtist(name) {
+async function createObject(array, type) {
     await pool.query("INSERT INTO artists (name) VALUES ($1)", [name]);
 }
 
@@ -182,7 +182,7 @@ async function insertNameIntoArtist(name) {
 
 module.exports = {
     getHomePageInfo,
-    insertNameIntoArtist,
     getCategoryInfo,
     getDetailInfo,
+    createObject
 };

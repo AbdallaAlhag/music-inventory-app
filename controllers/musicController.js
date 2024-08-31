@@ -1,4 +1,4 @@
-const { getHomePageInfo, getCategoryInfo, getDetailInfo } = require('../db/queries');
+const { getHomePageInfo, getCategoryInfo, getDetailInfo, createObject } = require('../db/queries');
 const moment = require('moment');
 async function getHomePage(req, res) {
 
@@ -52,5 +52,18 @@ const getDetail = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 }
+// Controller to handle rendering the form for a new message
+function getCreatePage(req, res) {
+    const type  = req.params.type ;
+    res.render('create', { title: 'create',type });
+}
 
-module.exports = { getHomePage, getCategory, getDetail };
+function createNewObject(req, res) {
+    const type = req.params.detail;
+    // const { username, text } = req.body;
+    const { arr } = req.body;
+    createObject(arr, type);
+    res.redirect('/');
+}
+
+module.exports = { getHomePage, getCategory, getDetail, createNewObject, getCreatePage };

@@ -17,18 +17,55 @@
     <h4>Catgetories</h4>
     <ul>
       <li>
-        <form action="/category/Artist"><button type="submit">Artists</button></form>
+        <form action="/category/Artist">
+          <button type="submit">Artists</button>
+        </form>
       </li>
-      <li><form action="/category/Albums"><button type="submit">Albums</button></form></li>
-      <li><form action="/category/Genres"><button type="submit">Genres</button></form></li>
-      <li><form action="/category/Labels"><button type="submit">Labels</button></form></li>
+      <li>
+        <form action="/category/Albums">
+          <button type="submit">Albums</button>
+        </form>
+      </li>
+      <li>
+        <form action="/category/Genres">
+          <button type="submit">Genres</button>
+        </form>
+      </li>
+      <li>
+        <form action="/category/Labels">
+          <button type="submit">Labels</button>
+        </form>
+      </li>
     </ul>
     <h4>Add new</h4>
     <ul>
-      <li><button>Add Artist</button></li>
-      <li><button>Add Album</button></li>
-      <li><button>Add Genre</button></li>
-      <li><button>Add Label</button></li>
+      <li>
+        <form action="/create/Artist">
+          <input type="hidden" name="type" value="Artist" /><button
+            type="submit"
+          >
+            Add Artist
+          </button>
+        </form>
+      </li>
+      <li>
+        <form action="/create/Album">
+          <input type="hidden" name="type" value="Album" />
+          <button>Add Album</button>
+        </form>
+      </li>
+      <li>
+        <form action="/create/Genre">
+          <input type="hidden" name="type" value="Genre" />
+          <button>Add Genre</button>
+        </form>
+      </li>
+      <li>
+        <form action="/create/Label">
+          <input type="hidden" name="type" value="Label" />
+          <button>Add Label</button>
+        </form>
+      </li>
     </ul>
   </nav>
 </aside>
