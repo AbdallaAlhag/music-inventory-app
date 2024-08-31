@@ -149,7 +149,83 @@ ul {
   border-radius: 5px;
 }
 
-.link-card{
+.link-card {
   text-decoration: none;
   color: whitesmoke;
+}
+
+.button-helper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 50px;
+  margin-bottom: 20px;
+}
+
+.button-helper a {
+  text-decoration: none;
+  color: whitesmoke;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left; /* Align text to the left */
+  border: 1px solid whitesmoke;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: whitesmoke;
+}
+
+.create-card {
+  width: 50%;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.styled-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  color: #121212;
+  font-weight: bold;
+}
+
+.form-group label {
+  font-size: 16px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.submit-btn {
+  background-color: #1ed760;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #218838;
 }

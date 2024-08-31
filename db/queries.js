@@ -174,8 +174,68 @@ async function getDetailInfo(id, type) {
 }
 
 
-async function createObject(array, type) {
-    await pool.query("INSERT INTO artists (name) VALUES ($1)", [name]);
+async function insertIntoDatabase(type, values) {
+    let query;
+    let params = [];
+
+    switch (type) {
+        case "Artist":
+            query = `
+            INSERT INTO artists (name) 
+            VALUES ($1)
+            RETURNING *;
+            `;
+            params = [values.name];
+            break;
+
+        case "Album":
+            query = `
+            INSERT INTO albums (title, release_date, artist_id, genre_id, label_id, cover_url) 
+            VALUES ($1, $2, $3, $4, $5, $6)
+            RETURNING *;
+            `;
+            params = [
+                values.title,
+                values.release_date,
+                values.artist_id,
+                values.genre_id,
+                values.label_id,
+                values.cover_url
+            ];
+            break;
+
+        case "Genre":
+            query = `
+            INSERT INTO genres (name) 
+            VALUES ($1)
+            RETURNING *;
+            `;
+            params = [values.title];
+            break;
+
+        case "Label":
+            query = `
+            INSERT INTO labels (name) 
+            VALUES ($1)
+            RETURNING *;
+            `;
+            params = [values.label_name];
+            break;
+
+        default:
+            throw new Error("Invalid type specified for insertion.");
+    }
+
+    try {
+        console.log('Insert query:', query, 'params:', params);
+        const result = await pool.query(query, params);
+        const insertedData = result.rows[0]; // Extracting the inserted row
+        console.log('Inserted data:', insertedData);
+        return insertedData;
+    } catch (error) {
+        console.error('Error inserting data:', error);
+        throw error;
+    }
 }
 
 
@@ -184,5 +244,5 @@ module.exports = {
     getHomePageInfo,
     getCategoryInfo,
     getDetailInfo,
-    createObject
+    insertIntoDatabase
 };

@@ -1,4 +1,4 @@
-const { getHomePageInfo, getCategoryInfo, getDetailInfo, createObject } = require('../db/queries');
+const { getHomePageInfo, getCategoryInfo, getDetailInfo, insertIntoDatabase } = require('../db/queries');
 const moment = require('moment');
 async function getHomePage(req, res) {
 
@@ -54,16 +54,22 @@ const getDetail = async (req, res) => {
 }
 // Controller to handle rendering the form for a new message
 function getCreatePage(req, res) {
-    const type  = req.params.type ;
-    res.render('create', { title: 'create',type });
+    const type = req.params.type;
+    res.render('create', { title: 'create', type });
 }
 
-function createNewObject(req, res) {
-    const type = req.params.detail;
-    // const { username, text } = req.body;
-    const { arr } = req.body;
-    createObject(arr, type);
-    res.redirect('/');
-}
+async function createNewObject(req, res) {
+    const type = req.params.type; // Assuming 'create' is the correct route parameter name
+    console.log(type)
+    const values = req.body; // Extract the form data directly from req.body
 
+    try {
+        const insertedData = await insertIntoDatabase(type, values); // Call the insert function
+        console.log('Inserted data:', insertedData);
+        res.redirect('/'); // Redirect to the home page after successful insertion
+    } catch (error) {
+        console.error('Error creating new object:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
 module.exports = { getHomePage, getCategory, getDetail, createNewObject, getCreatePage };
