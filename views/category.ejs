@@ -6,10 +6,10 @@
       <%- include("./partials/sidebar.ejs") %>
       <div class="content">
         <div class="main-content">
-          <h3>Recently Released</h3>
+          <h3><%= title %></h3>
           <div class="content-results">
             <% inventory.forEach(type => { %> <%- include("./partials/Card.ejs",
-            { type }) %> <% }); %>
+            { type, currentType }) %> <% }); %>
           </div>
         </div>
       </div>

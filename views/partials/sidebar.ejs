@@ -4,18 +4,24 @@
       <span><i class="fa-solid fa-headphones-simple fa-sm"></i></span>Music
       Inventory
     </h2>
-    <button id="home">
-      <i class="fa-solid fa-house" style="color: #ffffff fa-lg"></i>Home
+    <form action="/">
+      <button type="submit" id="home">
+        <i class="fa-solid fa-house" style="color: #ffffff fa-lg"></i>Home
+      </button>
+    </form>
+    <button id="search">
+      <i class="fa-solid fa-magnifying-glass"></i>Search
     </button>
-    <button id="search"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
   </header>
   <nav>
     <h4>Catgetories</h4>
     <ul>
-      <li><button>Artists</button></li>
-      <li><button>Albums</button></li>
-      <li><button>Genres</button></li>
-      <li><button>Labels</button></li>
+      <li>
+        <form action="/category/Artist"><button type="submit">Artists</button></form>
+      </li>
+      <li><form action="/category/Albums"><button type="submit">Albums</button></form></li>
+      <li><form action="/category/Genres"><button type="submit">Genres</button></form></li>
+      <li><form action="/category/Labels"><button type="submit">Labels</button></form></li>
     </ul>
     <h4>Add new</h4>
     <ul>

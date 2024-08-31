@@ -1,0 +1,89 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <div class="container">
+      <%- include("./partials/sidebar.ejs") %>
+      <div class="content">
+        <div class="main-content">
+          <div class="content-results">
+            <%- include("./partials/Card.ejs", { type }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <div class="container">
+      <%- include("./partials/sidebar.ejs") %>
+      <div class="content">
+        <div class="main-content">
+          <h2>Details</h2>
+          <div class="detail-card">
+            <% if (currentType === 'Artists') { %>
+            <img src="<%= type[0].album_cover_url %>" alt="Album cover" />
+            <h3>Artist: <%= type[0].artist_name %></h3>
+            <h4>Albums:</h4>
+            <ul>
+              <% type.forEach(album => { %>
+              <li>
+                <strong>Title:</strong> <%= album.album_title %> <br />
+                <strong>Release Date:</strong> <%=
+                moment(album.album_release_date).format('MMMM Do, YYYY') %>
+                <br />
+                <strong>Genre:</strong> <%= album.genre_name %> <br />
+                <strong>Label:</strong> <%= album.label_name %>
+              </li>
+              <% }); %>
+            </ul>
+            <% } else if (currentType === 'Albums') { %>
+            <img src="<%= type[0].album_cover_url %>" alt="Album cover" />
+            <h3>Album: <%= type[0].album_title %></h3>
+            <p><strong>Artist:</strong> <%= type[0].artist_name %></p>
+            <p>
+              <strong>Release Date:</strong> <%=
+              moment(type[0].album_release_date).format('MMMM Do, YYYY') %>
+            </p>
+            <p><strong>Genre:</strong> <%= type[0].genre_name %></p>
+            <p><strong>Label:</strong> <%= type[0].label_name %></p>
+            <% } else if (currentType === 'Genres') { %>
+            <h3>Genre: <%= type[0].genre_name %></h3>
+            <h4>Albums:</h4>
+            <ul>
+              <% type.forEach(album => { %>
+              <li>
+                <strong>Title:</strong> <%= album.album_title %> <br />
+                <strong>Artist:</strong> <%= album.artist_name %> <br />
+                <strong>Release Date:</strong> <%=
+                moment(album.album_release_date).format('MMMM Do, YYYY') %>
+                <br />
+                <strong>Label:</strong> <%= album.label_name %>
+              </li>
+              <% }); %>
+            </ul>
+            <% } else if (currentType === 'Labels') { %>
+            <h3>Label: <%= type[0].label_name %></h3>
+            <h4>Albums:</h4>
+            <ul>
+              <% type.forEach(album => { %>
+              <li>
+                <strong>Title:</strong> <%= album.album_title %> <br />
+                <strong>Artist:</strong> <%= album.artist_name %> <br />
+                <strong>Release Date:</strong> <%=
+                moment(album.album_release_date).format('MMMM Do, YYYY') %>
+                <br />
+                <strong>Genre:</strong> <%= album.genre_name %>
+              </li>
+              <% }); %>
+            </ul>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -8,4 +8,5 @@ router.get("/", musicController.getHomePage);
 
 // get category page
 router.get("/category/:category", musicController.getCategory);
+router.get("/detail/:detail", musicController.getDetail);
 module.exports = router;

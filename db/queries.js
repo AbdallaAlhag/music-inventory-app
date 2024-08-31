@@ -14,7 +14,6 @@ async function getHomePageInfo() {
 
         const result = await pool.query(recentAlbumsQuery);
         const recentAlbums = result.rows; // Extracting the rows property
-        console.log(recentAlbums)
         return recentAlbums;
     } catch (error) {
         console.error('Error querying recent albums:', error);
@@ -24,29 +23,33 @@ async function getHomePageInfo() {
 
 async function getCategoryInfo(type) {
     let query;
+    let currentType;
     switch (type) {
-        case "artists":
+        case "Artists":
             query = `SELECT * FROM artists ORDER BY name`;
+            currentType = 'Artists';
             break;
-        case "albums":
+        case "Albums":
             query = `SELECT * FROM albums ORDER BY release_date`;
+            currentType = 'Albums';
             break;
-        case "genres":
+        case "Genres":
             query = `SELECT * FROM genres ORDER BY name`;
+            currentType = 'Genres';
             break;
-        case "labels":
+        case "Labels":
             query = `SELECT * FROM labels ORDER BY name`;
+            currentType = 'Labels';
             break;
         default:
             query = `SELECT * FROM artists ORDER BY name`;
+            currentType = 'Artists';
             break;
     }
-
-
     try {
         const result = await pool.query(query);
-        const recentRows = result.rows; // Extracting the rows property
-        return recentRows;
+        const gatheredInventory = result.rows; // Extracting the rows property
+        return { gatheredInventory, currentType };
     } catch (error) {
         console.error('Error querying category data:', error);
         throw error;
@@ -54,14 +57,132 @@ async function getCategoryInfo(type) {
 }
 
 
+async function getDetailInfo(id, type) {
+    let query;
+    let params;
+
+    switch (type) {
+        case "Artists":
+            query = `SELECT 
+            a.id AS artist_id,
+            a.name AS artist_name,
+            al.id AS album_id,
+            al.title AS album_title,
+            al.release_date AS album_release_date,
+            g.name AS genre_name,
+            l.name AS label_name,
+            al.cover_url AS album_cover_url
+            FROM 
+                artists a
+            LEFT JOIN 
+                albums al ON a.id = al.artist_id
+            LEFT JOIN 
+                genres g ON al.genre_id = g.id
+            LEFT JOIN 
+                labels l ON al.label_id = l.id
+            WHERE 
+                a.id = $1;  
+            `;
+            params = [id];
+            break;
+        case "Albums":
+            query = `
+            SELECT 
+                al.id AS album_id,
+                al.title AS album_title,
+                al.release_date AS album_release_date,
+                a.name AS artist_name,
+                g.name AS genre_name,
+                l.name AS label_name,
+                al.cover_url AS album_cover_url
+            FROM 
+                albums al
+            LEFT JOIN 
+                artists a ON al.artist_id = a.id
+            LEFT JOIN 
+                genres g ON al.genre_id = g.id
+            LEFT JOIN 
+                labels l ON al.label_id = l.id
+            WHERE 
+                al.id = $1;
+            `;
+            params = [id];
+            break;
+        case "Genres":
+            query = `
+            SELECT 
+                g.id AS genre_id,
+                g.name AS genre_name,
+                al.id AS album_id,
+                al.title AS album_title,
+                al.release_date AS album_release_date,
+                a.name AS artist_name,
+                l.name AS label_name,
+                al.cover_url AS album_cover_url
+            FROM 
+                genres g
+            LEFT JOIN 
+                albums al ON g.id = al.genre_id
+            LEFT JOIN 
+                artists a ON al.artist_id = a.id
+            LEFT JOIN 
+                labels l ON al.label_id = l.id
+            WHERE 
+                g.id = $1; 
+            `;
+            params = [id];
+
+            break;
+        case "Labels":
+            query = `
+            SELECT 
+                l.id AS label_id,
+                l.name AS label_name,
+                al.id AS album_id,
+                al.title AS album_title,
+                al.release_date AS album_release_date,
+                a.name AS artist_name,
+                g.name AS genre_name,
+                al.cover_url AS album_cover_url
+            FROM 
+                labels l
+            LEFT JOIN 
+                albums al ON l.id = al.label_id
+            LEFT JOIN 
+                artists a ON al.artist_id = a.id
+            LEFT JOIN 
+                genres g ON al.genre_id = g.id
+            WHERE 
+                l.id = $1; 
+            `;
+            params = [id];
+            break;
+        default:
+            query = `SELECT * FROM artists ORDER BY name`;
+            break;
+    }
+    try {
+        console.log('query:', query, 'params:', params)
+        const result = await pool.query(query, params);
+        const data = result.rows; // Extracting the rows property
+        console.log('data:', data)
+        return data;
+    } catch (error) {
+        console.error('Error querying details:', error);
+        throw error;
+    }
+}
+
 
 async function insertNameIntoArtist(name) {
     await pool.query("INSERT INTO artists (name) VALUES ($1)", [name]);
 }
 
 
+
 module.exports = {
     getHomePageInfo,
     insertNameIntoArtist,
-    getCategoryInfo
+    getCategoryInfo,
+    getDetailInfo,
 };
