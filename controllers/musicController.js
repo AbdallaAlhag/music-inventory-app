@@ -1,4 +1,4 @@
-const { getHomePageInfo, getCategoryInfo, getDetailInfo, insertIntoDatabase, getDropdownData } = require('../db/queries');
+const { getHomePageInfo, getCategoryInfo, getDetailInfo, insertIntoDatabase, getDropdownData, updateDatabase } = require('../db/queries');
 const moment = require('moment');
 async function getHomePage(req, res) {
 
@@ -56,7 +56,7 @@ const getDetail = async (req, res) => {
 async function getCreatePage(req, res) {
     const type = req.params.type;
     const dropdownData = await getDropdownData();
-    res.render('create', { title: 'create', type, dropdownData });
+    res.render('create', { title: 'Create', type, dropdownData });
 }
 
 async function createNewObject(req, res) {
@@ -75,4 +75,36 @@ async function createNewObject(req, res) {
     }
 
 }
-module.exports = { getHomePage, getCategory, getDetail, createNewObject, getCreatePage };
+
+async function getUpdatePage(req, res) {
+    const { type, id } = req.params;
+
+    try {
+        const currentData = await getDetailInfo(id, type); // Fetch the current data from the database
+        console.log('type:', type, 'id:', id);
+        // console.log("currentData:", currentData);
+        if (type == 'Album') {
+            const dropdownData = await getDropdownData();
+            res.render('update', { type, title: 'Update', currentData: currentData[0], dropdownData, moment });
+        } else {
+            res.render('update', { type, title: 'Update', currentData: currentData[0], moment });
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+async function updateObject(req, res) {
+    const { type, id } = req.params;
+    const updatedData = req.body; // The updated data from the form
+
+    try {
+        await updateDatabase(id, type, updatedData); // Update the data in the database
+        res.redirect('/'); // Redirect to a relevant page after the update
+    } catch (error) {
+        console.error('Error updating data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+module.exports = { getHomePage, getCategory, getDetail, createNewObject, getCreatePage, getUpdatePage, updateObject };

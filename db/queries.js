@@ -162,10 +162,8 @@ async function getDetailInfo(id, type) {
             break;
     }
     try {
-        console.log('query:', query, 'params:', params)
         const result = await pool.query(query, params);
         const data = result.rows; // Extracting the rows property
-        console.log('data:', data)
         return data;
     } catch (error) {
         console.error('Error querying details:', error);
@@ -251,11 +249,60 @@ const getDropdownData = async () => {
     };
 };
 
+async function updateDatabase(id, type, updatedData) {
+    let query;
+    let params;
+
+    switch (type) {
+        case "Artists":
+            query = `
+            UPDATE artists 
+            SET name = $1
+            WHERE id = $2;
+            `;
+            params = [updatedData.title, id];
+            break;
+        case "Albums":
+            query = `
+            UPDATE albums 
+            SET title = $1, release_date = $2
+            WHERE id = $3;
+            `;
+            params = [updatedData.title, updatedData.release_date, id];
+            break;
+        case "Genres":
+            query = `
+            UPDATE genres 
+            SET name = $1
+            WHERE id = $2;
+            `;
+            params = [updatedData.title, id];
+            break;
+        case "Labels":
+            query = `
+            UPDATE labels 
+            SET name = $1
+            WHERE id = $2;
+            `;
+            params = [updatedData.title, id];
+            break;
+        default:
+            throw new Error('Invalid type');
+    }
+
+    try {
+        await pool.query(query, params); // Execute the update query
+    } catch (error) {
+        console.error('Error updating data:', error);
+        throw error;
+    }
+}
 
 module.exports = {
     getHomePageInfo,
     getCategoryInfo,
     getDetailInfo,
     insertIntoDatabase,
-    getDropdownData
+    getDropdownData,
+    updateDatabase
 };

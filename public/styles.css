@@ -261,3 +261,17 @@ select:focus {
   outline: none;
   box-shadow: 0 0 5px rgba(128, 189, 255, 0.5);
 }
+
+.edit-delete-helper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 25px;
+  margin-bottom: 20px;
+}
+
+.edit-delete-helper i:hover{
+  cursor: pointer;
+  color: #1ed760;
+}

@@ -3,3 +3,6 @@ good source for album covers: https://bendodson.com/projects/itunes-artwork-find
 icons: https://fontawesome.com/icons
 
 need more sources for imgs/labels. 
+
+NEED reuse single names for variables.
+Working with album, Albums, Album, albums variables are easy to fix but annoying.

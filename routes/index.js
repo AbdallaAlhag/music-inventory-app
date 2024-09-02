@@ -14,4 +14,8 @@ router.get("/detail/:detail", musicController.getDetail);
 router.get('/create/:type', musicController.getCreatePage);
 router.post('/create/:type', musicController.createNewObject);
 
+// Route to get the current data and display the update form
+router.get('/update/:type/:id', musicController.getUpdatePage);
+// Route to update the data and handle form submission
+router.post('/update/:type/:id', musicController.updateObject);
 module.exports = router;

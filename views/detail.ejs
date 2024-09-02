@@ -1,19 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-  <%- include("./partials/head.ejs") %>
-  <body>
-    <div class="container">
-      <%- include("./partials/sidebar.ejs") %>
-      <div class="content">
-        <div class="main-content">
-          <div class="content-results">
-            <%- include("./partials/Card.ejs", { type }) %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
   <%- include("./partials/head.ejs") %>
@@ -26,7 +10,13 @@
           <div class="detail-card">
             <% if (currentType === 'Artists') { %>
             <img src="<%= type[0].album_cover_url %>" alt="Album cover" />
-            <h3>Artist: <%= type[0].artist_name %></h3>
+            <div class="edit-delete-helper">
+              <h3>Artist: <%= type[0].artist_name %></h3>
+              <a href="/update/Artist/<%= type[0].artist_id %>"
+                ><i class="fa-solid fa-pen fa-2xl"></i
+              ></a>
+              <i class="fa-solid fa-trash fa-2xl"></i>
+            </div>
             <h4>Albums:</h4>
             <ul>
               <% type.forEach(album => { %>
@@ -41,8 +31,14 @@
               <% }); %>
             </ul>
             <% } else if (currentType === 'Albums') { %>
-            <img src="<%= type[0].album_cover_url %>" alt="Album cover" />
-            <h3>Album: <%= type[0].album_title %></h3>
+            <img src="<%= type[0].album_cover_url %>" alt="Artist Image" />
+            <div class="edit-delete-helper">
+              <h3>Album: <%= type[0].album_title %></h3>
+              <a href="/update/Album/<%= type[0].album_id %>"
+                ><i class="fa-solid fa-pen fa-2xl"></i
+              ></a>
+              <i class="fa-solid fa-trash fa-2xl"></i>
+            </div>
             <p><strong>Artist:</strong> <%= type[0].artist_name %></p>
             <p>
               <strong>Release Date:</strong> <%=
@@ -51,7 +47,13 @@
             <p><strong>Genre:</strong> <%= type[0].genre_name %></p>
             <p><strong>Label:</strong> <%= type[0].label_name %></p>
             <% } else if (currentType === 'Genres') { %>
-            <h3>Genre: <%= type[0].genre_name %></h3>
+            <div class="edit-delete-helper">
+              <h3>Genre: <%= type[0].genre_name %></h3>
+              <a href="/update/Genre/<%= type[0].genre_id %>"
+                ><i class="fa-solid fa-pen fa-2xl"></i
+              ></a>
+              <i class="fa-solid fa-trash fa-2xl"></i>
+            </div>
             <h4>Albums:</h4>
             <ul>
               <% type.forEach(album => { %>
@@ -66,7 +68,13 @@
               <% }); %>
             </ul>
             <% } else if (currentType === 'Labels') { %>
-            <h3>Label: <%= type[0].label_name %></h3>
+            <div class="edit-delete-helper">
+              <h3>Label: <%= type[0].label_name %></h3>
+              <a href="/update/Label/<%= type[0].label_id %>"
+                ><i class="fa-solid fa-pen fa-2xl"></i
+              ></a>
+              <i class="fa-solid fa-trash fa-2xl"></i>
+            </div>
             <h4>Albums:</h4>
             <ul>
               <% type.forEach(album => { %>
