@@ -238,11 +238,24 @@ async function insertIntoDatabase(type, values) {
     }
 }
 
+const getDropdownData = async () => {
+    const [artists, genres, labels] = await Promise.all([
+        pool.query('SELECT id, name FROM artists ORDER BY name'),
+        pool.query('SELECT id, name FROM genres ORDER BY name'),
+        pool.query('SELECT id, name FROM labels ORDER BY name')
+    ]);
+    return {
+        artists: artists.rows,
+        genres: genres.rows,
+        labels: labels.rows
+    };
+};
 
 
 module.exports = {
     getHomePageInfo,
     getCategoryInfo,
     getDetailInfo,
-    insertIntoDatabase
+    insertIntoDatabase,
+    getDropdownData
 };
