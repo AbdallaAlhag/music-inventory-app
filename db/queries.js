@@ -254,7 +254,7 @@ async function updateDatabase(id, type, updatedData) {
     let params;
 
     switch (type) {
-        case "Artist":
+        case "Artists":
             query = `
             UPDATE artists 
             SET name = $1
@@ -262,7 +262,7 @@ async function updateDatabase(id, type, updatedData) {
             `;
             params = [updatedData.name, id];
             break;
-        case "Album":
+        case "Albums":
             query = `
             UPDATE albums 
             SET title = $1, release_date = $2
@@ -270,7 +270,7 @@ async function updateDatabase(id, type, updatedData) {
             `;
             params = [updatedData.title, updatedData.release_date, id];
             break;
-        case "Genre":
+        case "Genres":
             query = `
             UPDATE genres 
             SET name = $1
@@ -278,7 +278,7 @@ async function updateDatabase(id, type, updatedData) {
             `;
             params = [updatedData.name, id];
             break;
-        case "Label":
+        case "Labels":
             query = `
             UPDATE labels 
             SET name = $1

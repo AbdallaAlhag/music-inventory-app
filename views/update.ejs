@@ -7,12 +7,12 @@
       <div class="content">
         <h3>Update</h3>
         <div class="create-card">
+          <% if (type === 'Artists') { %>
             <form
-              action="/update/<%= type %>/<%= currentData.id %>"
+              action="/update/<%= type %>/<%= currentData.artist_id %>"
               method="POST"
               class="styled-form"
             >
-              <% if (type === 'Artists') { %>
               <div class="form-group">
                 <label for="name">Full Name:</label>
                 <input
@@ -23,14 +23,19 @@
                   required
                 />
               </div>
-              <% } else if (type === 'Albums') { %>
+          <% } else if (type === 'Albums') { %>
+            <form
+              action="/update/<%= type %>/<%= currentData.album_id %>"
+              method="POST"
+              class="styled-form"
+            >
               <div class="form-group">
                 <label for="title">Title:</label>
                 <input
                   type="text"
                   id="title"
                   name="title"
-                  value=<%= currentData.title %>"
+                  value="<%= currentData.album_title %>"
                   required
                 />
               </div>
@@ -40,7 +45,7 @@
                   type="text"
                   id="cover_url"
                   name="cover_url"
-                  value="<%= currentData.cover_url %>"
+                  value="<%= currentData.album_cover_url %>"
                   required
                 />
               </div>
@@ -50,7 +55,7 @@
                   type="date"
                   id="release_date"
                   name="release_date"
-                  value="<%= currentData.release_date %>"
+                  value="<%= moment(currentData.album_release_date).format('YYYY-MM-DD') %>"
                   required
                 />
               </div>
@@ -89,29 +94,39 @@
                   </select>
                 </div>
               </div>
-              <% } else if (type === 'Genres') { %>
+          <% } else if (type === 'Genres') { %>
+            <form
+              action="/update/<%= type %>/<%= currentData.genre_id %>"
+              method="POST"
+              class="styled-form"
+            >
               <div class="form-group">
                 <label for="title">Title:</label>
                 <input
                   type="text"
                   id="title"
                   name="title"
-                  value="<%= currentData.title %>"
+                  value="<%= currentData.genre_name %>"
                   required
                 />
               </div>
-              <% } else if (type === 'Labels') { %>
+          <% } else if (type === 'Labels') { %>
+            <form
+              action="/update/<%= type %>/<%= currentData.label_id %>"
+              method="POST"
+              class="styled-form"
+            >
               <div class="form-group">
                 <label for="label_name">Name:</label>
                 <input
                   type="text"
                   id="label_name"
                   name="label_name"
-                  value= "<%= currentData.label_name %>"
+                  value="<%= currentData.label_name %>"
                   required
                 />
               </div>
-              <% } %>
+          <% } %>
               <button type="submit" class="submit-btn">
                 Update <%= type %>
               </button>
