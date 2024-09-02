@@ -98,10 +98,10 @@ async function getUpdatePage(req, res) {
 async function updateObject(req, res) {
     const { type, id } = req.params;
     const updatedData = req.body; // The updated data from the form
-
+    console.log("type:", type, "id:", id, 'updatedData:', updatedData);
     try {
         await updateDatabase(id, type, updatedData); // Update the data in the database
-        res.redirect('/'); // Redirect to a relevant page after the update
+        res.redirect('/');
     } catch (error) {
         console.error('Error updating data:', error);
         res.status(500).send('Internal Server Error');
