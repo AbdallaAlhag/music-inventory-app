@@ -12,18 +12,18 @@
               method="POST"
               class="styled-form"
             >
-              <% if (type === 'Artist') { %>
+              <% if (type === 'Artists') { %>
               <div class="form-group">
                 <label for="name">Full Name:</label>
                 <input
                   type="text"
                   id="name"
                   name="name"
-                  value="<%= currentData.name %>"
+                  value="<%= currentData.artist_name %>"
                   required
                 />
               </div>
-              <% } else if (type === 'Album') { %>
+              <% } else if (type === 'Albums') { %>
               <div class="form-group">
                 <label for="title">Title:</label>
                 <input
@@ -89,7 +89,7 @@
                   </select>
                 </div>
               </div>
-              <% } else if (type === 'Genre') { %>
+              <% } else if (type === 'Genres') { %>
               <div class="form-group">
                 <label for="title">Title:</label>
                 <input
@@ -100,14 +100,14 @@
                   required
                 />
               </div>
-              <% } else if (type === 'Label') { %>
+              <% } else if (type === 'Labels') { %>
               <div class="form-group">
                 <label for="label_name">Name:</label>
                 <input
                   type="text"
                   id="label_name"
                   name="label_name"
-                  value="<%= currentData.label_name %>"
+                  value= "<%= currentData.label_name %>"
                   required
                 />
               </div>

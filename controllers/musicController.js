@@ -82,7 +82,7 @@ async function getUpdatePage(req, res) {
     try {
         const currentData = await getDetailInfo(id, type); // Fetch the current data from the database
         console.log('type:', type, 'id:', id);
-        // console.log("currentData:", currentData);
+        console.log("currentData:", currentData[0]);
         if (type == 'Album') {
             const dropdownData = await getDropdownData();
             res.render('update', { type, title: 'Update', currentData: currentData[0], dropdownData, moment });
