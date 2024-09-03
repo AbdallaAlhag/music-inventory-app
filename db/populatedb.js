@@ -21,7 +21,8 @@ CREATE TABLE IF NOT EXISTS labels (
 
 CREATE TABLE IF NOT EXISTS artists (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) UNIQUE NOT NULL
+    name VARCHAR(255) UNIQUE NOT NULL,
+    cover_url VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS albums (
@@ -87,28 +88,28 @@ VALUES
 ON CONFLICT (name) DO NOTHING;
 
 -- Insert into Artists
-INSERT INTO artists (name) 
+INSERT INTO artists (name, cover_url) 
 VALUES
-    ('The Beatles'),
-    ('Nirvana'),
-    ('Adele'),
-    ('Bob Marley'),
-    ('Miles Davis'),
-    ('Johnny Cash'),
-    ('Beethoven'),
-    ('Aretha Franklin'),
-    ('Metallica'),
-    ('Bob Dylan'),
-    ('Daft Punk'),
-    ('The Clash'),
-    ('Ray Charles'),
-    ('Bee Gees'),
-    ('Kanye West'),
-    ('Elvis Presley'),
-    ('Beyoncé'),
-    ('Shakira'),
-    ('BTS'),
-    ('James Brown')
+    ('The Beatles', 'https://lastfm.freetls.fastly.net/i/u/770x0/f36d782e120456a330921749a73952f5.jpg#f36d782e120456a330921749a73952f5.jpg#c66bdbda8e8579417621f3e8ce51ba44'),
+    ('Nirvana', 'https://lastfm.freetls.fastly.net/i/u/770x0/78e291d28d475dfbf113f1489e9c1654.jpg#78e291d28d475dfbf113f1489e9c1654'),
+    ('Adele', 'https://lastfm.freetls.fastly.net/i/u/770x0/c66bdbda8e8579417621f3e8ce51ba44.jpg#c66bdbda8e8579417621f3e8ce51ba44'),
+    ('Bob Marley', 'https://lastfm.freetls.fastly.net/i/u/770x0/72fdf82fa9554e72b9e14a12f6001876.jpg#72fdf82fa9554e72b9e14a12f6001876'),
+    ('Miles Davis', 'https://lastfm.freetls.fastly.net/i/u/770x0/5b22b9fa43d50ffdd264ec1ae50330c1.jpg#5b22b9fa43d50ffdd264ec1ae50330c1'),
+    ('Johnny Cash', 'https://lastfm.freetls.fastly.net/i/u/770x0/5af78843a78af10d16879ff877a59696.jpg#5af78843a78af10d16879ff877a59696'),
+    ('Beethoven', 'https://lastfm.freetls.fastly.net/i/u/770x0/a49970e2c99b1291b1ec965ba7b28c10.jpg#a49970e2c99b1291b1ec965ba7b28c10'),
+    ('Aretha Franklin', 'https://lastfm.freetls.fastly.net/i/u/770x0/20afef13aa085971e479c2534f63854d.jpg#20afef13aa085971e479c2534f63854d'),
+    ('Metallica', 'https://lastfm.freetls.fastly.net/i/u/770x0/8cb78d0a38f020f84240138a092cf32f.jpg#8cb78d0a38f020f84240138a092cf32f'),
+    ('Bob Dylan', 'https://lastfm.freetls.fastly.net/i/u/770x0/80435969dfa98bffd143c1239e58ddfe.jpg#80435969dfa98bffd143c1239e58ddfe'),
+    ('Daft Punk', 'https://lastfm.freetls.fastly.net/i/u/770x0/80623b58659c416b8751f06a4edceb83.jpg#80623b58659c416b8751f06a4edceb83'),
+    ('The Clash', 'https://lastfm.freetls.fastly.net/i/u/770x0/33ee7009d602d19471d48e65b1928e95.jpg#33ee7009d602d19471d48e65b1928e95'),
+    ('Ray Charles', 'https://lastfm.freetls.fastly.net/i/u/770x0/04419bd2509847d19e9391c01aecdc21.jpg#04419bd2509847d19e9391c01aecdc21'),
+    ('Bee Gees', 'https://lastfm.freetls.fastly.net/i/u/770x0/f948efbd5214b86a40e2df346e5df014.jpg#f948efbd5214b86a40e2df346e5df014'),
+    ('Kanye West', 'https://lastfm.freetls.fastly.net/i/u/770x0/1e5f3c0acc7c92b384ccdfe7eac85cda.jpg#1e5f3c0acc7c92b384ccdfe7eac85cda'),
+    ('Elvis Presley', 'https://lastfm.freetls.fastly.net/i/u/770x0/e1f28bd09ebb4e2fb369b9cc6ac82a9c.jpg#e1f28bd09ebb4e2fb369b9cc6ac82a9c'),
+    ('Beyoncé', 'https://lastfm.freetls.fastly.net/i/u/770x0/61f2437893a97e8703b61c28dfdb463c.jpg#61f2437893a97e8703b61c28dfdb463c'),
+    ('Shakira', 'https://lastfm.freetls.fastly.net/i/u/770x0/6ae1d18c3abc477a79023d7bce42953f.jpg#6ae1d18c3abc477a79023d7bce42953f'),
+    ('BTS', 'https://lastfm.freetls.fastly.net/i/u/770x0/b1723d75165270cac718a082b4935f21.jpg#b1723d75165270cac718a082b4935f21'),
+    ('James Brown', 'https://lastfm.freetls.fastly.net/i/u/770x0/0702f261407e4e1b9d3e8b7a27475cc3.jpg#0702f261407e4e1b9d3e8b7a27475cc3')
 ON CONFLICT (name) DO NOTHING;
 
 -- Insert into Albums with cover URLs

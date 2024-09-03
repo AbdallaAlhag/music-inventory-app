@@ -21,7 +21,7 @@ const getCategory = async (req, res) => {
 
     try {
         const { gatheredInventory, currentType } = await getCategoryInfo(type);
-
+        // console.log(gatheredInventory)
         res.render('category', {
             title: type,
             inventory: gatheredInventory,
@@ -99,7 +99,7 @@ async function getUpdatePage(req, res) {
 async function updateObject(req, res) {
     const { type, id } = req.params;
     const updatedData = req.body; // The updated data from the form
-    // console.log("type:", type, "id:", id, 'updatedData:', updatedData);
+    console.log("type:", type, "id:", id, 'updatedData:', updatedData);
     try {
         await updateDatabase(id, type, updatedData); // Update the data in the database
         res.redirect('/');
@@ -111,7 +111,7 @@ async function updateObject(req, res) {
 
 async function deleteObject(req, res) {
     const { type, id } = req.params;
-    console.log('hi', type, id);
+    // console.log('hi', type, id);
     try {
         await deleteDatabase(id, type) // delete the data in the database
         res.redirect('/');

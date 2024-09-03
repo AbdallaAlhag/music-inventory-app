@@ -9,7 +9,7 @@
           <h2>Details</h2>
           <div class="detail-card">
             <% if (currentType === 'Artists') { %>
-            <img src="<%= type[0].album_cover_url %>" alt="Album cover" />
+            <img src="<%= type[0].cover_url %>" alt="Album cover" />
             <div class="edit-delete-helper">
               <h3>Artist: <%= type[0].artist_name %></h3>
               <a href="/update/Artists/<%= type[0].artist_id %>"

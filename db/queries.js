@@ -65,6 +65,7 @@ async function getDetailInfo(id, type) {
         case "Artists":
             query = `SELECT 
             a.id AS artist_id,
+            a.cover_url as cover_url,
             a.name AS artist_name,
             al.id AS album_id,
             al.title AS album_title,
@@ -179,11 +180,11 @@ async function insertIntoDatabase(type, values) {
     switch (type) {
         case "Artist":
             query = `
-            INSERT INTO artists (name) 
-            VALUES ($1)
+            INSERT INTO artists (name, cover_url) 
+            VALUES ($1, $2)
             RETURNING *;
             `;
-            params = [values.name];
+            params = [values.name, values.cover_url];
             break;
 
         case "Album":
@@ -225,10 +226,10 @@ async function insertIntoDatabase(type, values) {
     }
 
     try {
-        console.log('Insert query:', query, 'params:', params);
+        // console.log('Insert query:', query, 'params:', params);
         const result = await pool.query(query, params);
         const insertedData = result.rows[0]; // Extracting the inserted row
-        console.log('Inserted data:', insertedData);
+        // console.log('Inserted data:', insertedData);
         return insertedData;
     } catch (error) {
         console.error('Error inserting data:', error);
@@ -257,10 +258,10 @@ async function updateDatabase(id, type, updatedData) {
         case "Artists":
             query = `
             UPDATE artists 
-            SET name = $1
-            WHERE id = $2;
+            SET name = $1, cover_url = $2
+            WHERE id = $3;
             `;
-            params = [updatedData.name, id];
+            params = [updatedData.name, updatedData.cover_url, id];
             break;
         case "Albums":
             query = `
