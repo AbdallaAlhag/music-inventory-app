@@ -35,18 +35,27 @@
               </form>
             </div>
             <h4>Albums:</h4>
-            <ul>
+            <div class="content-results">
               <% type.forEach(album => { %>
-              <li>
-                <strong>Title:</strong> <%= album.album_title %> <br />
-                <strong>Release Date:</strong> <%=
-                moment(album.album_release_date).format('MMMM Do, YYYY') %>
-                <br />
-                <strong>Genre:</strong> <%= album.genre_name %> <br />
-                <strong>Label:</strong> <%= album.label_name %>
-              </li>
+              <div class="content-results-card">
+                <% if (album.album_title) { %>
+                <a
+                  href="/detail/<%= album.album_id %>-Albums%>"
+                  class="link-card"
+                >
+                  <img
+                    src="<%= album.album_cover_url ? album.album_cover_url : '/default-album-cover.png' %>"
+                    alt="<%= album.album_title ? `album cover for ${album.album_title}` : '' %>"
+                  />
+                  <h4><%= album.album_title ? album.album_title : '' %></h4>
+                  <h4><%= album.artist_name ? album.artist_name : '' %></h4>
+                </a>
+                <% } else { %>
+                <p>None in inventory. Try adding one!</p>
+                <% } %>
+              </div>
               <% }); %>
-            </ul>
+            </div>
 
             <% } else if (currentType === 'Albums') { %>
             <img
@@ -159,17 +168,27 @@
                 </button>
               </form>
             </div>
-            <ul>
+            <div class="content-results">
               <% type.forEach(album => { %>
-              <li>
-                <strong>Label:</strong> <%= album.label_name %> <br />
-                <br />
-                <strong>Notable Artists:</strong> <%= album.artist_name %>
-                <br />
-                <strong>Genre:</strong> <%= album.genre_name %>
-              </li>
+              <div class="content-results-card">
+                <% if (album.album_title) { %>
+                <a
+                  href="/detail/<%= album.album_id %>-Albums%>"
+                  class="link-card"
+                >
+                  <img
+                    src="<%= album.album_cover_url ? album.album_cover_url : '/default-album-cover.png' %>"
+                    alt="<%= album.album_title ? `album cover for ${album.album_title}` : '' %>"
+                  />
+                  <h4><%= album.album_title ? album.album_title : '' %></h4>
+                  <h4><%= album.artist_name ? album.artist_name : '' %></h4>
+                </a>
+                <% } else { %>
+                <p>None in inventory. Try adding one!</p>
+                <% } %>
+              </div>
               <% }); %>
-            </ul>
+            </div>
             <% } %>
           </div>
         </div>
