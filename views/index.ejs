@@ -7,30 +7,41 @@
       <div class="content">
         <h3>Good morning</h3>
         <div class="nav-buttons">
-          <button style="background-color: #e51e31">
-            Rock<img
-              src="/navButton/rockIcon.jpg"
-              alt="The strokes group photo"
-            />
-          </button>
-          <button style="background-color: #8c67ac">
-            Hip Hop<img
-              src="/navButton/hiphopIcon.jpg"
-              alt="Andre3000 posing"
-            />
-          </button>
-          <button style="background-color: #1e3264">
-            Indie<img src="/navButton/indieIcon.jpg" alt="Andre3000 posing" />
-          </button>
-          <button style="background-color: #5f8108">
-            Pop<img src="/navButton/popIcon.jpeg" alt="Andre3000 posing" />
-          </button>
+          <a href="/detail/1-Genres" class="link-card">
+            <button style="background-color: #e51e31">
+              Rock<img
+                src="/navButton/rockIcon.jpg"
+                alt="The strokes group photo"
+              /></button
+          ></a>
+
+          <a href="/detail/4-Genres" class="link-card">
+            <button style="background-color: #8c67ac">
+              Hip Hop<img
+                src="/navButton/hiphopIcon.jpg"
+                alt="Andre3000 posing"
+              /></button
+          ></a>
+          <a href="/detail/3-Genres" class="link-card">
+            <button style="background-color: #1e3264">
+              Alternative<img
+                src="/navButton/indieIcon.jpg"
+                alt="Artist posing"
+              /></button
+          ></a>
+          <a href="/detail/2-Genres" class="link-card">
+            <button style="background-color: #5f8108">
+              Pop<img
+                src="/navButton/popIcon.jpeg"
+                alt="Andre3000 posing"
+              /></button
+          ></a>
         </div>
         <div class="main-content">
           <h3><%= title %></h3>
           <div class="content-results">
-            <% inventory.forEach(type => { %> <%-
-            include("./partials/Card.ejs", { type }) %> <% }); %>
+            <% inventory.forEach(type => { %> <%- include("./partials/Card.ejs",
+            { type }) %> <% }); %>
           </div>
         </div>
       </div>

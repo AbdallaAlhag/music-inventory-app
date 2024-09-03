@@ -47,6 +47,7 @@
               </li>
               <% }); %>
             </ul>
+
             <% } else if (currentType === 'Albums') { %>
             <img
               src="<%= type[0].album_cover_url ? type[0].album_cover_url : '/default-album-cover.png' %>"
@@ -107,14 +108,31 @@
                 </button>
               </form>
             </div>
-            <ul>
+            <strong>Featured Track:</strong>
+            <br />
+            <br />
+            <div class="content-results">
               <% type.forEach(album => { %>
-              <li>
-                <strong>Featured Track:</strong> <%= album.album_title %> <strong>By: </strong><%= album.artist_name %><br />
-                <br />
-              </li>
+              <div class="content-results-card">
+                <% if (album.album_title) { %>
+                <a
+                  href="/detail/<%= album.album_id %>-Albums%>"
+                  class="link-card"
+                >
+                  <img
+                    src="<%= album.album_cover_url ? album.album_cover_url : '/default-album-cover.png' %>"
+                    alt="<%= album.album_title ? `album cover for ${album.album_title}` : '' %>"
+                  />
+                  <h4><%= album.album_title ? album.album_title : '' %></h4>
+                  <h4><%= album.artist_name ? album.artist_name : '' %></h4>
+                </a>
+                <% } else { %>
+                <p>None in inventory. Try adding one!</p>
+                <% } %>
+              </div>
               <% }); %>
-            </ul>
+            </div>
+
             <% } else if (currentType === 'Labels') { %>
             <img
               src="<%= type[0].cover_url ? type[0].cover_url : '/default-album-cover.png' %>"

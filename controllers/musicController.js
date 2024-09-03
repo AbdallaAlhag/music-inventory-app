@@ -43,7 +43,7 @@ const getDetail = async (req, res) => {
         const result = await getDetailInfo(id, Currenttype);
         console.log(result)
         res.render('detail', {
-            title: 'detail',
+            title: 'Detail',
             type: result,
             moment: moment,
             currentType: Currenttype
