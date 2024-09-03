@@ -1,0 +1,15 @@
+<div class="content-results-card">
+    <% if (album.album_title) { %>
+    <a href="/detail/<%= album.album_id %>-Albums%>" class="link-card">
+      <img
+        src="<%= album.album_cover_url ? album.album_cover_url : '/default-album-cover.png' %>"
+        alt="<%= album.album_title ? `album cover for ${album.album_title}` : '' %>"
+      />
+      <h4><%= album.album_title ? album.album_title : '' %></h4>
+      <h4><%= album.artist_name ? album.artist_name : '' %></h4>
+    </a>
+    <% } else { %>
+    <p>None in inventory. Try adding one!</p>
+    <% } %>
+  </div>
+  

@@ -35,7 +35,7 @@
               </form>
             </div>
             <h4>Albums:</h4>
-            <div class="content-results">
+            <!-- <div class="content-results">
               <% type.forEach(album => { %>
               <div class="content-results-card">
                 <% if (album.album_title) { %>
@@ -55,6 +55,11 @@
                 <% } %>
               </div>
               <% }); %>
+            </div> -->
+            <div class="content-results">
+              <% type.forEach(album => { %> <%-
+              include('./partials/contentResultsCard', { album: album }) %> <%
+              }); %>
             </div>
 
             <% } else if (currentType === 'Albums') { %>
@@ -120,7 +125,7 @@
             <strong>Featured Track:</strong>
             <br />
             <br />
-            <div class="content-results">
+            <!-- <div class="content-results">
               <% type.forEach(album => { %>
               <div class="content-results-card">
                 <% if (album.album_title) { %>
@@ -140,8 +145,12 @@
                 <% } %>
               </div>
               <% }); %>
+            </div> -->
+            <div class="content-results">
+              <% type.forEach(album => { %> <%-
+              include('./partials/contentResultsCard', { album: album }) %> <%
+              }); %>
             </div>
-
             <% } else if (currentType === 'Labels') { %>
             <img
               src="<%= type[0].cover_url ? type[0].cover_url : '/default-album-cover.png' %>"
@@ -168,7 +177,7 @@
                 </button>
               </form>
             </div>
-            <div class="content-results">
+            <!-- <div class="content-results">
               <% type.forEach(album => { %>
               <div class="content-results-card">
                 <% if (album.album_title) { %>
@@ -188,6 +197,11 @@
                 <% } %>
               </div>
               <% }); %>
+            </div> -->
+            <div class="content-results">
+              <% type.forEach(album => { %> <%-
+              include('./partials/contentResultsCard', { album: album }) %> <%
+              }); %>
             </div>
             <% } %>
           </div>
