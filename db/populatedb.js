@@ -11,7 +11,8 @@ DROP TABLE IF EXISTS labels;
 
 CREATE TABLE IF NOT EXISTS genres (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) UNIQUE NOT NULL
+    name VARCHAR(255) UNIQUE NOT NULL,
+    cover_url VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS labels (
@@ -40,28 +41,28 @@ CREATE TABLE IF NOT EXISTS albums (
 
 -- Insert sample data
 -- Insert into Genres
-INSERT INTO genres (name) 
+INSERT INTO genres (name, cover_url) 
 VALUES
-    ('Rock'),
-    ('Pop'),
-    ('Alternative'),
-    ('Hip Hop'),
-    ('Jazz'),
-    ('Country'),
-    ('Classical'),
-    ('R&B'),
-    ('Metal'),
-    ('Reggae'),
-    ('Blues'),
-    ('Electronic'),
-    ('Folk'),
-    ('Punk'),
-    ('Soul'),
-    ('Disco'),
-    ('Gospel'),
-    ('Latin'),
-    ('K-Pop'),
-    ('Funk')
+    ('Rock', 'https://emby.media/community/uploads/inline/251713/5c43555961571_RockMusic.png'),
+    ('Pop', 'https://emby.media/community/uploads/inline/251713/5c43557ecccdf_PopMusic.png'),
+    ('Alternative', 'https://emby.media/community/uploads/monthly_2020_09/1301903135_grunge2.png.39e41746314e6b316a1fa7630852145b.png'),
+    ('Hip Hop', 'https://emby.media/community/uploads/inline/251713/5e42e437d3440_Hiphop.png'),
+    ('Jazz', 'https://emby.media/community/uploads/monthly_2020_09/1440714062_Jazz2.thumb.png.34ba7eecda979e30fe2146885fd98b7b.png'),
+    ('Country', 'https://emby.media/community/uploads/inline/251713/5c43556fad289_CountryMusic.png'),
+    ('Classical', 'https://emby.media/community/uploads/monthly_2020_09/Classical.thumb.png.0e7e46abf9a72e2b98a9128e6fc09544.png'),
+    ('R&B', 'https://emby.media/community/uploads/inline/251713/5e42e3b9d26f2_RnB.png'),
+    ('Metal', 'https://emby.media/community/uploads/monthly_2020_09/411126427_Metal(2).thumb.png.7a17ccf21e9daf5bfe809ab17ad9dfa0.png'),
+    ('Reggae', 'https://emby.media/community/uploads/monthly_2020_09/Reggae.thumb.png.78caa149374cec087bb6eaea21af6060.png'),
+    ('Blues', 'https://emby.media/community/uploads/monthly_2020_10/Blues.thumb.png.7ecac841590cc7d9b126f0d692d87578.png'),
+    ('Electronic', 'https://emby.media/community/uploads/inline/251713/5e42e4902e886_EDM.png'),
+    ('Folk', 'https://emby.media/community/uploads/monthly_2020_10/1440379420_Acoustic2.thumb.png.40bfe493fc119708c6eb0b4b6f0d04c6.png'),
+    ('Punk', 'https://emby.media/community/uploads/monthly_2020_09/Punk.thumb.png.8a511b3ffd79f90f74a3dbe6a84e706e.png'),
+    ('Soul', 'https://emby.media/community/uploads/monthly_2022_11/Soul.png.bc0b0ebcc73e00de79b31c6f5713d89f.png'),
+    ('Disco', 'https://emby.media/community/uploads/monthly_2020_10/Disco.thumb.png.8bf8976538ac0ea20944f059eaace245.png'),
+    ('Gospel', 'https://emby.media/community/uploads/inline/251713/5e42e3724f412_Gospel.png'),
+    ('Latin', 'https://icons.iconarchive.com/icons/sirubico/music-genre/256/Latin-icon.png'),
+    ('K-Pop', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqTY7RsS55qcwyulRQbhDh1RrfhedOUW95Tg&s'),
+    ('Funk', 'https://emby.media/community/uploads/monthly_2021_02/478970656_70sMusic.thumb.png.39a106f3902a6c0f8030ac027ad9dd6e.png')
 ON CONFLICT (name) DO NOTHING;
 
 -- Insert into Labels
@@ -81,7 +82,7 @@ VALUES
     ('RCA Records', 'https://reaganray.com/img/blog/record-labels/rcavictor.jpg'),
     ('Universal Music', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3_mF_Z64_76nOXGFZbNgaM3xIxDdY2qD7Mg&s'),
     ('Virgin Records', 'https://reaganray.com/img/blog/record-labels/virgin.jpg'),
-    ('Interscope', 'https://static.wikia.nocookie.net/yungblud/images/f/f7/Interscope-Records-Logo.png/revision/latest?cb=20201208162013'),
+    ('Interscope', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfFsqzqg4zH-1Bl1K5sP7a1es0aZA7rQXTZQ&s'),
     ('Geffen Records', 'https://reaganray.com/img/blog/record-labels/geffen.jpg'),
     ('Mercury Records', 'https://reaganray.com/img/blog/record-labels/mercury.jpg'),
     ('EMI', 'https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/0006/5527/brand.gif?itok=BALftWgf'),

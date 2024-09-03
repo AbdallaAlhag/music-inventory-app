@@ -107,16 +107,11 @@
                 </button>
               </form>
             </div>
-            <h4>Albums:</h4>
             <ul>
               <% type.forEach(album => { %>
               <li>
-                <strong>Title:</strong> <%= album.album_title %> <br />
-                <strong>Artist:</strong> <%= album.artist_name %> <br />
-                <strong>Release Date:</strong> <%=
-                moment(album.album_release_date).format('MMMM Do, YYYY') %>
+                <strong>Featured Track:</strong> <%= album.album_title %> <strong>By: </strong><%= album.artist_name %><br />
                 <br />
-                <strong>Label:</strong> <%= album.label_name %>
               </li>
               <% }); %>
             </ul>

@@ -114,6 +114,7 @@ async function getDetailInfo(id, type) {
             SELECT 
                 g.id AS genre_id,
                 g.name AS genre_name,
+                g.cover_url AS cover_url,
                 al.id AS album_id,
                 al.title AS album_title,
                 al.release_date AS album_release_date,
@@ -206,11 +207,11 @@ async function insertIntoDatabase(type, values) {
 
         case "Genre":
             query = `
-            INSERT INTO genres (name) 
-            VALUES ($1)
+            INSERT INTO genres (name, cover_url) 
+            VALUES ($1, $2)
             RETURNING *;
             `;
-            params = [values.title];
+            params = [values.title, values.cover_url];
             break;
 
         case "Label":
@@ -275,10 +276,10 @@ async function updateDatabase(id, type, updatedData) {
         case "Genres":
             query = `
             UPDATE genres 
-            SET name = $1
-            WHERE id = $2;
+            SET name = $1, cover_url = $2
+            WHERE id = $3;
             `;
-            params = [updatedData.name, id];
+            params = [updatedData.title, updatedData.cover_url, id];
             break;
         case "Labels":
             query = `
