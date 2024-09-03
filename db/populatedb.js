@@ -16,7 +16,9 @@ CREATE TABLE IF NOT EXISTS genres (
 
 CREATE TABLE IF NOT EXISTS labels (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) UNIQUE NOT NULL
+    name VARCHAR(255) UNIQUE NOT NULL,
+    cover_url VARCHAR(255)
+
 );
 
 CREATE TABLE IF NOT EXISTS artists (
@@ -63,28 +65,29 @@ VALUES
 ON CONFLICT (name) DO NOTHING;
 
 -- Insert into Labels
-INSERT INTO labels (name) 
+INSERT INTO labels (name, cover_url) 
 VALUES
-    ('Apple Records'),
-    ('DGC'),
-    ('Columbia Records'),
-    ('Island Records'),
-    ('Capitol Records'),
-    ('Atlantic Records'),
-    ('Def Jam'),
-    ('Sony Music'),
-    ('Warner Bros'),
-    ('Motown'),
-    ('Epic Records'),
-    ('RCA Records'),
-    ('Universal Music'),
-    ('Virgin Records'),
-    ('Interscope'),
-    ('Geffen Records'),
-    ('Mercury Records'),
-    ('EMI'),
-    ('Blue Note'),
-    ('Chess Records')
+    ('Apple Records', 'https://reaganray.com/img/blog/record-labels/apple.jpg'),
+    ('DGC','https://i.discogs.com/QLsE_K4fXroz1a4w582tRddCwiG2VqN7Gd9jiCOia-Y/rs:fit/g:sm/q:90/h:358/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTE2NTk2/Mi0xNTM3MTYxNTM4/LTU3NjkucG5n.jpeg'),
+    ('Columbia Records', 'https://reaganray.com/img/blog/record-labels/columbia-1.jpg'),
+    ('Island Records', 'https://reaganray.com/img/blog/record-labels/islands.jpg'),
+    ('Capitol Records', 'https://reaganray.com/img/blog/record-labels/capitol-1.jpg'),
+    ('Atlantic Records', 'https://reaganray.com/img/blog/record-labels/atlantic-1.jpg'),
+    ('Def Jam', 'https://reaganray.com/img/blog/record-labels/defjam.jpg'),
+    ('Sony Music', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRENl1796uoB4Bf5z3ok_1kLpjxXzZsCVq3nA&s'),
+    ('Warner Bros', 'https://reaganray.com/img/blog/record-labels/wb.jpg'),
+    ('Motown', 'https://reaganray.com/img/blog/record-labels/motown-1.jpg'),
+    ('Epic Records', 'https://reaganray.com/img/blog/record-labels/epic-1.jpg'),
+    ('RCA Records', 'https://reaganray.com/img/blog/record-labels/rcavictor.jpg'),
+    ('Universal Music', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3_mF_Z64_76nOXGFZbNgaM3xIxDdY2qD7Mg&s'),
+    ('Virgin Records', 'https://reaganray.com/img/blog/record-labels/virgin.jpg'),
+    ('Interscope', 'https://static.wikia.nocookie.net/yungblud/images/f/f7/Interscope-Records-Logo.png/revision/latest?cb=20201208162013'),
+    ('Geffen Records', 'https://reaganray.com/img/blog/record-labels/geffen.jpg'),
+    ('Mercury Records', 'https://reaganray.com/img/blog/record-labels/mercury.jpg'),
+    ('EMI', 'https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/0006/5527/brand.gif?itok=BALftWgf'),
+    ('Blue Note', 'https://reaganray.com/img/blog/record-labels/bluenote.jpg'),
+    ('Chess Records', 'https://reaganray.com/img/blog/record-labels/chess-1.jpg')
+
 ON CONFLICT (name) DO NOTHING;
 
 -- Insert into Artists

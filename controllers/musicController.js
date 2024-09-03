@@ -41,6 +41,7 @@ const getDetail = async (req, res) => {
     // console.log('id:', id, 'Currenttype:', Currenttype);
     try {
         const result = await getDetailInfo(id, Currenttype);
+        console.log(result)
         res.render('detail', {
             title: 'detail',
             type: result,

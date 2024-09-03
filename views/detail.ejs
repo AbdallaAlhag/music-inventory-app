@@ -9,7 +9,10 @@
           <h2>Details</h2>
           <div class="detail-card">
             <% if (currentType === 'Artists') { %>
-            <img src="<%= type[0].cover_url %>" alt="Album cover" />
+            <img
+              src="<%= type[0].cover_url ? type[0].cover_url : '/default-album-cover.png' %>"
+              alt="Album cover"
+            />
             <div class="edit-delete-helper">
               <h3>Artist: <%= type[0].artist_name %></h3>
               <a href="/update/Artists/<%= type[0].artist_id %>"
@@ -45,7 +48,11 @@
               <% }); %>
             </ul>
             <% } else if (currentType === 'Albums') { %>
-            <img src="<%= type[0].album_cover_url %>" alt="Artist Image" />
+            <img
+              src="<%= type[0].album_cover_url ? type[0].album_cover_url : '/default-album-cover.png' %>"
+              alt="Album cover"
+            />
+
             <div class="edit-delete-helper">
               <h3>Album: <%= type[0].album_title %></h3>
               <a href="/update/Albums/<%= type[0].album_id %>"
@@ -75,6 +82,10 @@
             <p><strong>Genre:</strong> <%= type[0].genre_name %></p>
             <p><strong>Label:</strong> <%= type[0].label_name %></p>
             <% } else if (currentType === 'Genres') { %>
+            <img
+              src="<%= type[0].cover_url ? type[0].cover_url : '/default-album-cover.png' %>"
+              alt="Album cover"
+            />
             <div class="edit-delete-helper">
               <h3>Genre: <%= type[0].genre_name %></h3>
               <a href="/update/Genres/<%= type[0].genre_id %>"
@@ -110,6 +121,10 @@
               <% }); %>
             </ul>
             <% } else if (currentType === 'Labels') { %>
+            <img
+              src="<%= type[0].cover_url ? type[0].cover_url : '/default-album-cover.png' %>"
+              alt="Album cover"
+            />
             <div class="edit-delete-helper">
               <h3>Label: <%= type[0].label_name %></h3>
               <a href="/update/Labels/<%= type[0].label_id %>"
@@ -131,14 +146,12 @@
                 </button>
               </form>
             </div>
-            <h4>Albums:</h4>
             <ul>
               <% type.forEach(album => { %>
               <li>
-                <strong>Title:</strong> <%= album.album_title %> <br />
-                <strong>Artist:</strong> <%= album.artist_name %> <br />
-                <strong>Release Date:</strong> <%=
-                moment(album.album_release_date).format('MMMM Do, YYYY') %>
+                <strong>Label:</strong> <%= album.label_name %> <br />
+                <br />
+                <strong>Notable Artists:</strong> <%= album.artist_name %>
                 <br />
                 <strong>Genre:</strong> <%= album.genre_name %>
               </li>

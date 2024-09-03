@@ -139,6 +139,7 @@ async function getDetailInfo(id, type) {
             SELECT 
                 l.id AS label_id,
                 l.name AS label_name,
+                l.cover_url AS cover_url,
                 al.id AS album_id,
                 al.title AS album_title,
                 al.release_date AS album_release_date,
@@ -214,11 +215,11 @@ async function insertIntoDatabase(type, values) {
 
         case "Label":
             query = `
-            INSERT INTO labels (name) 
-            VALUES ($1)
+            INSERT INTO labels (name, cover_url) 
+            VALUES ($1, $2) 
             RETURNING *;
             `;
-            params = [values.label_name];
+            params = [values.label_name, values.cover_url];
             break;
 
         default:
@@ -253,7 +254,7 @@ const getDropdownData = async () => {
 async function updateDatabase(id, type, updatedData) {
     let query;
     let params;
-
+    console.log("updatedData:", updatedData);
     switch (type) {
         case "Artists":
             query = `
@@ -282,10 +283,10 @@ async function updateDatabase(id, type, updatedData) {
         case "Labels":
             query = `
             UPDATE labels 
-            SET name = $1
-            WHERE id = $2;
+            SET name = $1, cover_url = $2
+            WHERE id = $3;
             `;
-            params = [updatedData.name, id];
+            params = [updatedData.label_name, updatedData.cover_url, id];
             break;
         default:
             throw new Error('Invalid type');
