@@ -19,4 +19,7 @@ router.get('/update/:type/:id', musicController.getUpdatePage);
 // Route to update the data and handle form submission
 router.post('/update/:type/:id', musicController.updateObject);
 
+// Route to delete an object
+router.delete('/delete/:type/:id', musicController.deleteObject);
+
 module.exports = router;

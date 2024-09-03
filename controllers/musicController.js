@@ -1,4 +1,4 @@
-const { getHomePageInfo, getCategoryInfo, getDetailInfo, insertIntoDatabase, getDropdownData, updateDatabase } = require('../db/queries');
+const { getHomePageInfo, getCategoryInfo, getDetailInfo, insertIntoDatabase, getDropdownData, updateDatabase, deleteDatabase } = require('../db/queries');
 const moment = require('moment');
 async function getHomePage(req, res) {
 
@@ -36,9 +36,9 @@ const getCategory = async (req, res) => {
 
 const getDetail = async (req, res) => {
     const details = req.params.detail;
-    console.log('details:', details);
+    // console.log('details:', details);
     const [id, Currenttype] = details.split('-');
-    console.log('id:', id, 'Currenttype:', Currenttype);
+    // console.log('id:', id, 'Currenttype:', Currenttype);
     try {
         const result = await getDetailInfo(id, Currenttype);
         res.render('detail', {
@@ -61,13 +61,13 @@ async function getCreatePage(req, res) {
 
 async function createNewObject(req, res) {
     const type = req.params.type; // Assuming 'create' is the correct route parameter name
-    console.log(type)
+    // console.log(type)
     const values = req.body; // Extract the form data directly from req.body
 
 
     try {
         const insertedData = await insertIntoDatabase(type, values); // Call the insert function
-        console.log('Inserted data:', insertedData);
+        // console.log('Inserted data:', insertedData);
         res.redirect('/'); // Redirect to the home page after successful insertion
     } catch (error) {
         console.error('Error creating new object:', error);
@@ -81,8 +81,8 @@ async function getUpdatePage(req, res) {
 
     try {
         const currentData = await getDetailInfo(id, type); // Fetch the current data from the database
-        console.log('type:', type, 'id:', id);
-        console.log("currentData:", currentData[0]);
+        // console.log('type:', type, 'id:', id);
+        // console.log("currentData:", currentData[0]);
         if (type == 'Albums') {
             const dropdownData = await getDropdownData();
             // console.log(dropdownData);
@@ -99,7 +99,7 @@ async function getUpdatePage(req, res) {
 async function updateObject(req, res) {
     const { type, id } = req.params;
     const updatedData = req.body; // The updated data from the form
-    console.log("type:", type, "id:", id, 'updatedData:', updatedData);
+    // console.log("type:", type, "id:", id, 'updatedData:', updatedData);
     try {
         await updateDatabase(id, type, updatedData); // Update the data in the database
         res.redirect('/');
@@ -108,4 +108,17 @@ async function updateObject(req, res) {
         res.status(500).send('Internal Server Error');
     }
 }
-module.exports = { getHomePage, getCategory, getDetail, createNewObject, getCreatePage, getUpdatePage, updateObject };
+
+async function deleteObject(req, res) {
+    const { type, id } = req.params;
+    console.log('hi', type, id);
+    try {
+        await deleteDatabase(id, type) // delete the data in the database
+        res.redirect('/');
+    } catch (error) {
+        console.error('Error updating data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+module.exports = { getHomePage, getCategory, getDetail, createNewObject, getCreatePage, getUpdatePage, updateObject, deleteObject };

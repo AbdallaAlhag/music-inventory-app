@@ -58,6 +58,11 @@ ul {
   list-style: none;
 }
 
+aside h2,
+h4 {
+  margin-bottom: 20px;
+}
+
 .content {
   display: flex;
   flex-direction: column;
@@ -262,7 +267,7 @@ select:focus {
   box-shadow: 0 0 5px rgba(128, 189, 255, 0.5);
 }
 
-.edit-delete-helper{
+.edit-delete-helper {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -271,7 +276,23 @@ select:focus {
   margin-bottom: 20px;
 }
 
-.edit-delete-helper i:hover{
+.edit-delete-helper i:hover {
   cursor: pointer;
   color: #1ed760;
+}
+
+.edit-delete-helper a {
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+.edit-delete-helper form {
+  display: inline;
+}
+
+.edit-delete-helper button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: whitesmoke;
 }

@@ -298,11 +298,57 @@ async function updateDatabase(id, type, updatedData) {
     }
 }
 
+async function deleteDatabase(id, type) {
+    let query;
+    let params;
+
+    switch (type) {
+        case "Artists":
+            query = `
+            DELETE FROM artists 
+            WHERE id = $1;
+            `;
+            params = [id];
+            break;
+        case "Albums":
+            query = `
+            DELETE FROM albums 
+            WHERE id = $1;
+            `;
+            params = [id];
+            break;
+        case "Genres":
+            query = `
+            DELETE FROM genres 
+            WHERE id = $1;
+            `;
+            params = [id];
+            break;
+        case "Labels":
+            query = `
+            DELETE FROM labels 
+            WHERE id = $1;
+            `;
+            params = [id];
+            break;
+        default:
+            throw new Error('Invalid type');
+    }
+
+    try {
+        await pool.query(query, params); // Execute the delete query
+    } catch (error) {
+        console.error('Error deleting data:', error);
+        throw error;
+    }
+}
+
 module.exports = {
     getHomePageInfo,
     getCategoryInfo,
     getDetailInfo,
     insertIntoDatabase,
     getDropdownData,
-    updateDatabase
+    updateDatabase,
+    deleteDatabase
 };
