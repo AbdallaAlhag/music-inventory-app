@@ -1,10 +1,18 @@
-const { getHomePageInfo, getCategoryInfo, getDetailInfo, insertIntoDatabase, getDropdownData, updateDatabase, deleteDatabase } = require('../db/queries');
+const {
+    getHomePageInfo,
+    getCategoryInfo,
+    getDetailInfo,
+    insertIntoDatabase,
+    getDropdownData,
+    updateDatabase,
+    deleteDatabase
+} = require('../db/queries');
 const moment = require('moment');
-async function getHomePage(req, res) {
+const { body, param, validationResult } = require("express-validator");
 
+async function getHomePage(req, res) {
     try {
         const recentAlbums = await getHomePageInfo();
-        // console.log(recentAlbums);
         res.render('index', {
             title: 'Recently Released Albums',
             inventory: recentAlbums,
@@ -21,7 +29,6 @@ const getCategory = async (req, res) => {
 
     try {
         const { gatheredInventory, currentType } = await getCategoryInfo(type);
-        // console.log(gatheredInventory)
         res.render('category', {
             title: type,
             inventory: gatheredInventory,
@@ -36,12 +43,10 @@ const getCategory = async (req, res) => {
 
 const getDetail = async (req, res) => {
     const details = req.params.detail;
-    // console.log('details:', details);
     const [id, Currenttype] = details.split('-');
-    // console.log('id:', id, 'Currenttype:', Currenttype);
+
     try {
         const result = await getDetailInfo(id, Currenttype);
-        console.log(result)
         res.render('detail', {
             title: 'Detail',
             type: result,
@@ -53,40 +58,45 @@ const getDetail = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 }
-// Controller to handle rendering the form for a new message
+
 async function getCreatePage(req, res) {
     const type = req.params.type;
     const dropdownData = await getDropdownData();
     res.render('create', { title: 'Create', type, dropdownData });
 }
 
-async function createNewObject(req, res) {
-    const type = req.params.type; // Assuming 'create' is the correct route parameter name
-    // console.log(type)
-    const values = req.body; // Extract the form data directly from req.body
+const createNewObject = [
+    // Validation and sanitization
+    body('name').trim().isLength({ min: 1 }).escape(),
+    body('title').optional({ checkFalsy: true }).trim().escape(),
+    body('release_date').optional({ checkFalsy: true }).isISO8601().toDate(),
 
+    async (req, res) => {
+        const type = req.params.type;
+        const errors = validationResult(req);
 
-    try {
-        const insertedData = await insertIntoDatabase(type, values); // Call the insert function
-        // console.log('Inserted data:', insertedData);
-        res.redirect('/'); // Redirect to the home page after successful insertion
-    } catch (error) {
-        console.error('Error creating new object:', error);
-        res.status(500).send('Internal Server Error');
+        if (!errors.isEmpty()) {
+            // Handle errors
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        try {
+            const insertedData = await insertIntoDatabase(type, req.body);
+            res.redirect('/');
+        } catch (error) {
+            console.error('Error creating new object:', error);
+            res.status(500).send('Internal Server Error');
+        }
     }
-
-}
+];
 
 async function getUpdatePage(req, res) {
     const { type, id } = req.params;
 
     try {
-        const currentData = await getDetailInfo(id, type); // Fetch the current data from the database
-        // console.log('type:', type, 'id:', id);
-        // console.log("currentData:", currentData[0]);
+        const currentData = await getDetailInfo(id, type);
         if (type == 'Albums') {
             const dropdownData = await getDropdownData();
-            // console.log(dropdownData);
             res.render('update', { type, title: 'Update', currentData: currentData[0], dropdownData, moment });
         } else {
             res.render('update', { type, title: 'Update', currentData: currentData[0], moment });
@@ -97,29 +107,56 @@ async function getUpdatePage(req, res) {
     }
 };
 
-async function updateObject(req, res) {
-    const { type, id } = req.params;
-    const updatedData = req.body; // The updated data from the form
-    console.log("type:", type, "id:", id, 'updatedData:', updatedData);
-    try {
-        await updateDatabase(id, type, updatedData); // Update the data in the database
-        res.redirect('/');
-    } catch (error) {
-        console.error('Error updating data:', error);
-        res.status(500).send('Internal Server Error');
-    }
-}
+const updateObject = [
+    // Validation and sanitization
+    param('id').isUUID().withMessage('Invalid ID format'),
+    body('name').optional({ checkFalsy: true }).trim().escape(),
+    body('title').optional({ checkFalsy: true }).trim().escape(),
+    body('release_date').optional({ checkFalsy: true }).isISO8601().toDate(),
 
-async function deleteObject(req, res) {
-    const { type, id } = req.params;
-    // console.log('hi', type, id);
-    try {
-        await deleteDatabase(id, type) // delete the data in the database
-        res.redirect('/');
-    } catch (error) {
-        console.error('Error updating data:', error);
-        res.status(500).send('Internal Server Error');
-    }
-}
+    async (req, res) => {
+        const { type, id } = req.params;
+        const errors = validationResult(req);
 
-module.exports = { getHomePage, getCategory, getDetail, createNewObject, getCreatePage, getUpdatePage, updateObject, deleteObject };
+        if (!errors.isEmpty()) {
+            // Handle errors
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        try {
+            await updateDatabase(id, type, req.body);
+            res.redirect('/');
+        } catch (error) {
+            console.error('Error updating data:', error);
+            res.status(500).send('Internal Server Error');
+        }
+    }
+];
+
+const deleteObject = [
+    // Validation and sanitization
+    param('id').isUUID().withMessage('Invalid ID format'),
+
+    async (req, res) => {
+        const { type, id } = req.params;
+
+        try {
+            await deleteDatabase(id, type);
+            res.redirect('/');
+        } catch (error) {
+            console.error('Error deleting data:', error);
+            res.status(500).send('Internal Server Error');
+        }
+    }
+];
+
+module.exports = {
+    getHomePage,
+    getCategory,
+    getDetail,
+    createNewObject,
+    getCreatePage,
+    getUpdatePage,
+    updateObject,
+    deleteObject
+};
