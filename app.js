@@ -21,6 +21,8 @@ app.use(methodOverride('_method'));
 // });
 
 app.use('/', router);
-
+app.use((req, res) => {
+    res.status(404).render('404', { title: '404' });
+});
 const PORT = 3000;
 app.listen(PORT, () => console.log(`My first Express app - listening on port ${PORT}!`));
