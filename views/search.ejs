@@ -10,9 +10,11 @@
         <div class="main-content">
           <h1>Search Results for "<%= searchQuery %>"</h1>
           <div class="content-results">
-            <% if (searchResults.length > 0) { %> <% searchResults.forEach(type
-            => { %> <%- include("./partials/Card.ejs", { type, currentType }) %>
-            <% }); %> <% } else { %>
+            <% if (searchResults.length > 0) { %>
+            <% searchResults.forEach(function(type) { %>
+            <%- include("./partials/Card.ejs", { type, currentType }) %>
+            <% }); %>
+            <% } else { %>
             <p>No results found for "<%= searchQuery %>".</p>
             <% } %>
           </div>
@@ -21,3 +23,4 @@
     </div>
   </body>
 </html>
+
