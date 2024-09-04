@@ -150,6 +150,35 @@ const deleteObject = [
     }
 ];
 
+async function searchFunction(req, res) {
+    const searchQuery = req.query.searchQuery || ''; // Extract search query input from the query string
+    const type = req.query.browserSelect || ''; // Extract selected browser from the query string
+
+    console.log('Search Query:', searchQuery);
+    console.log('Selected Browser:', type);
+
+    try {
+        const results = await getCategoryInfo(type);
+        const gatheredInventory = results.gatheredInventory || [];
+
+      
+        let searchResults = gatheredInventory.filter(user =>
+            (user.name && user.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+            (user.title && user.title.toLowerCase().includes(searchQuery.toLowerCase()))
+        );
+        res.render('search', {
+            title: 'Search Results',
+            searchQuery,
+            searchResults,
+            currentType: type,
+        });
+    } catch (error) {
+        console.error('Error searching users:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+
 module.exports = {
     getHomePage,
     getCategory,
@@ -158,5 +187,6 @@ module.exports = {
     getCreatePage,
     getUpdatePage,
     updateObject,
-    deleteObject
+    deleteObject,
+    searchFunction
 };

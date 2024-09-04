@@ -22,4 +22,7 @@ router.post('/update/:type/:id', musicController.updateObject);
 // Route to delete an object
 router.delete('/delete/:type/:id', musicController.deleteObject);
 
+// Route to handle search request
+router.get('/search', musicController.searchFunction);
+
 module.exports = router;

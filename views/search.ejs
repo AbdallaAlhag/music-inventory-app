@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head.ejs') %>
+  </head>
+  <body>
+    <div class="container">
+      <%- include("./partials/sidebar.ejs") %>
+      <div class="content">
+        <div class="main-content">
+          <h1>Search Results for "<%= searchQuery %>"</h1>
+          <% if (searchResults.length > 0) { %> <% searchResults.forEach(type =>
+          { %> <%- include("./partials/Card.ejs", { type, currentType }) %> <%
+          }); %> <% } else { %>
+          <p>No results found for "<%= searchQuery %>".</p>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

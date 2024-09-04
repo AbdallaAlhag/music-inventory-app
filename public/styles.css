@@ -297,3 +297,34 @@ select:focus {
   padding: 0;
   color: whitesmoke;
 }
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.search-form input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  color: #e0e0e0;
+  background-color: #2c2c2c;
+  transition: border-color 0.3s ease;
+}
+
+.search-form select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #444;
+  background-color: #2c2c2c;
+  color: #e0e0e0;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}

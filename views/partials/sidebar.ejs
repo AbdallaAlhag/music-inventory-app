@@ -9,12 +9,30 @@
         <i class="fa-solid fa-house" style="color: #ffffff fa-lg"></i>Home
       </button>
     </form>
-    <button id="search">
-      <i class="fa-solid fa-magnifying-glass"></i>Search
-    </button>
+    <form action="/search" method="GET" class="search-form">
+      <label for="searchQuery"></label>
+      <input
+        type="text"
+        id="searchQuery"
+        name="searchQuery"
+        placeholder="Search..."
+        autocomplete="off"
+      />
+
+      <label for="browserSelect"></label>
+      <select id="type" name="browserSelect">
+        <option value="Artists">Artist</option>
+        <option value="Albums">Album</option>
+        <option value="Genres">Genre</option>
+        <option value="Labels">Label</option>
+      </select>
+      <button type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>Search
+      </button>
+    </form>
   </header>
   <nav>
-    <h4>Catgetories</h4>
+    <h4>Categories</h4>
     <ul>
       <li>
         <form action="/category/Artist">
