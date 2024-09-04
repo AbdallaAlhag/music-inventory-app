@@ -39,11 +39,10 @@ A full-stack application to keep track of your music collection. This app will a
 
 ## Features:
 
-* Create, Read, Update, and Delete (CRUD) Albums and Artists
-* Search for Albums and Artists
-* Display album covers and artist images
-* Display album and artist information
-* Update album and artist information
+* Create, Read, Update, and Delete (CRUD) Albums, Artists, Genres, and Labels
+* Search query throughout the site
+* Display cover, images, and detail for multiple categories
+* Update information to site
 
 # Deploy:
 * Deployed environment with postgres on railway
