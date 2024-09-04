@@ -154,8 +154,7 @@ async function searchFunction(req, res) {
     const searchQuery = req.query.searchQuery || ''; // Extract search query input from the query string
     const type = req.query.browserSelect || ''; // Extract selected browser from the query string
 
-    console.log('Search Query:', searchQuery);
-    console.log('Selected Browser:', type);
+
 
     try {
         const results = await getCategoryInfo(type);

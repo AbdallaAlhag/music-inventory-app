@@ -228,10 +228,8 @@ async function insertIntoDatabase(type, values) {
     }
 
     try {
-        // console.log('Insert query:', query, 'params:', params);
         const result = await pool.query(query, params);
         const insertedData = result.rows[0]; // Extracting the inserted row
-        // console.log('Inserted data:', insertedData);
         return insertedData;
     } catch (error) {
         console.error('Error inserting data:', error);
@@ -255,7 +253,6 @@ const getDropdownData = async () => {
 async function updateDatabase(id, type, updatedData) {
     let query;
     let params;
-    console.log("updatedData:", updatedData);
     switch (type) {
         case "Artists":
             query = `
