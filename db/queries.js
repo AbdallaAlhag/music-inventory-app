@@ -230,7 +230,7 @@ async function insertIntoDatabase(type, values) {
     try {
         const result = await pool.query(query, params);
         const insertedData = result.rows[0]; // Extracting the inserted row
-        return insertedData;
+                                                                                            return insertedData;
     } catch (error) {
         console.error('Error inserting data:', error);
         throw error;
