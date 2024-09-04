@@ -44,6 +44,29 @@ A full-stack application to keep track of your music collection. This app will a
 * Display cover, images, and detail for multiple categories
 * Update information to site
 
+## Dependencies:
+
+### dotenv
+Used to store environment variables in a `.env` file and easily switch between different environments.
+
+### ejs
+Used as the templating engine for the project. Allows for the use of dynamic templates with variables and conditionals.
+
+### express
+Used as the web framework for the project. Provides many features such as routing, middleware, and a request/response cycle.
+
+### express-validator
+Used to validate user input on the server side. Provides a simple way to validate forms and prevent invalid data from being entered into the database.
+
+### method-override
+Used to override the HTTP method of a request. Allows for the use of PUT and DELETE methods which are not supported by all browsers.
+
+### moment
+Used to easily work with dates and times in JavaScript. Provides a simple and intuitive API for formatting dates and times.
+
+### pg
+Used to interact with the PostgreSQL database. Provides a simple and intuitive API for performing CRUD operations on the database.
+
 # Deploy:
 * Deployed environment with postgres on railway
 
