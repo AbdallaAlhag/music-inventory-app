@@ -3,11 +3,11 @@
 const { Client } = require("pg");
 require('dotenv').config()
 
+// DROP TABLE IF EXISTS albums;
+// DROP TABLE IF EXISTS artists;
+// DROP TABLE IF EXISTS genres;
+// DROP TABLE IF EXISTS labels;
 const SQL = `
-DROP TABLE IF EXISTS albums;
-DROP TABLE IF EXISTS artists;
-DROP TABLE IF EXISTS genres;
-DROP TABLE IF EXISTS labels;
 
 CREATE TABLE IF NOT EXISTS genres (
     id SERIAL PRIMARY KEY,
