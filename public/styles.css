@@ -370,6 +370,10 @@ select:focus {
     gap: 10px;
   }
 
+  .form-group{
+    width: 100%;
+  }
+
   select {
     width: 100%;
   }
