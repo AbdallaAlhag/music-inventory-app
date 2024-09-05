@@ -110,10 +110,11 @@ h4 {
 }
 
 .nav-buttons button img {
-  margin-left: 200px; /* Adjust the space between text and image */
+  margin-left: 180px; 
   height: 100%; /* Adjust image size */
   width: auto; /* Adjust image size */
   border-radius: 5px;
+  max-width: 100%;
 }
 
 .content-results {
@@ -347,7 +348,11 @@ select:focus {
     font-size: 16px;
     height: 100px;
   }
-
+  
+  .nav-buttons button img {
+    margin-left: 0px; 
+  }
+  
   .content-results-card {
     width: 45%; /* Adjust card width for smaller screens */
     padding: 10px;
