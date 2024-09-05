@@ -109,7 +109,7 @@ async function getUpdatePage(req, res) {
 
 const updateObject = [
     // Validation and sanitization
-    param('id').isUUID().withMessage('Invalid ID format'),
+    param('id').isNumeric().withMessage('Invalid ID format'),
     body('name').optional({ checkFalsy: true }).trim().escape(),
     body('title').optional({ checkFalsy: true }).trim().escape(),
     body('release_date').optional({ checkFalsy: true }).isISO8601().toDate(),
@@ -122,7 +122,6 @@ const updateObject = [
             // Handle errors
             return res.status(400).json({ errors: errors.array() });
         }
-
         try {
             await updateDatabase(id, type, req.body);
             res.redirect('/');
@@ -135,7 +134,7 @@ const updateObject = [
 
 const deleteObject = [
     // Validation and sanitization
-    param('id').isUUID().withMessage('Invalid ID format'),
+    param('id').isNumeric().withMessage('Invalid ID format'),
 
     async (req, res) => {
         const { type, id } = req.params;
@@ -160,7 +159,7 @@ async function searchFunction(req, res) {
         const results = await getCategoryInfo(type);
         const gatheredInventory = results.gatheredInventory || [];
 
-      
+
         let searchResults = gatheredInventory.filter(user =>
             (user.name && user.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
             (user.title && user.title.toLowerCase().includes(searchQuery.toLowerCase()))
