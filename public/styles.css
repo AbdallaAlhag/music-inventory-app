@@ -78,6 +78,10 @@ h4 {
   padding: 20px;
   padding-left: 0px;
 }
+
+.detail-card-img{
+  max-width: 100%;
+}
 .nav-buttons {
   display: flex;
   flex-direction: row;
@@ -160,7 +164,7 @@ h4 {
 .link-card {
   text-decoration: none;
   color: whitesmoke;
-  width: 24.5%;
+  width: 23%;
 }
 
 .button-helper {
@@ -349,6 +353,7 @@ select:focus {
   .nav-buttons button {
     font-size: 16px;
     height: 100px;
+    flex-wrap: wrap;
   }
 
   .nav-buttons button img {
@@ -368,4 +373,9 @@ select:focus {
   select {
     width: 100%;
   }
+  .create-card{
+    width: 100%;
+    margin: 0 auto;
+  }
+
 }
